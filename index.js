@@ -13,39 +13,15 @@ app.get('/stocks', function (req, res) {
   const okRes = [
     {
         "variantId": "110012",
-        "sellerId": "FALABELLA_CHILE",
-        "offeringId": "110012",
-        "stockGeoTypeKey": "Facility",
-        "stockGeoTypeId": "2103",
-        "shippingOptionType": "SiteToStore",
-        "stateOfStock": "InStock",
-        "hasStock": true,
-        "quantity": 100,
-        "sourceUpdatedAt": "2020-07-18T11:33:34.000Z"
+        "sellerId": "SOME_SELLER"
     },
     {
         "variantId": "110012",
-        "sellerId": "FALABELLA_CHILE",
-        "offeringId": "110011",
-        "stockGeoTypeKey": "Facility",
-        "stockGeoTypeId": "2103",
-        "shippingOptionType": "SiteToStore",
-        "stateOfStock": "InStock",
-        "hasStock": true,
-        "quantity": 100,
-        "sourceUpdatedAt": "2020-07-18T11:33:34.000Z"
+        "sellerId": "SOME_SELLER"
     },
     {
         "variantId": "110012",
-        "sellerId": "FALABELLA_CHILE",
-        "offeringId": "4695904",
-        "stockGeoTypeKey": "Facility",
-        "stockGeoTypeId": "2103",
-        "shippingOptionType": "SiteToStore",
-        "stateOfStock": "InStock",
-        "hasStock": true,
-        "quantity": 100,
-        "sourceUpdatedAt": "2020-07-18T11:33:34.000Z"
+        "sellerId": "SOME_SELLER"
     }
 ];
   const id = req.query.variantId;
@@ -62,7 +38,7 @@ app.post("/stocks", function(req, res){
   const id = req.body.variantId;
   console.log("POST: ", id);
   const conflictResponse = ["2001", "2002","2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"];
-  const conflictRes = {"errors":[{"code":"Conflict","status":409,"detail":"Data exists with sourceUpdatedAt: 2021-05-12T12:23:00.000Z Please try again with the updated data"}]};
+  const conflictRes = {"errors":[{"code":"Conflict","status":409,"detail":"Data exists"}]};
   
   if(conflictResponse.includes(id)){
     res.status(409).send(conflictRes);
