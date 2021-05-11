@@ -10,11 +10,6 @@ app.get('/stocks', function (req, res) {
     "5001", "5002", "5003", "5004", "5005", "5006", "5007", "5008", "5009", "5010",
     "6001", "6002", "6003", "6004", "6005", "6006", "6007", "6008", "6009", "6010"
   ];
-
-
-  const conflictResponse = ["2001", "2002","2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"];
-  const notFoundResponse = ["3001", "3002","3003", "3004", "3005", "3006", "3007", "3008", "3009", "3010"];
-
   const okRes = [
     {
         "variantId": "110012",
@@ -53,9 +48,8 @@ app.get('/stocks', function (req, res) {
         "sourceUpdatedAt": "2020-07-18T11:33:34.000Z"
     }
 ];
-const conflictRes={"errors":[{"code":"Conflict","status":409,"detail":"Data exists with sourceUpdatedAt: 2021-05-12T12:23:00.000Z Please try again with the updated data"}]};
   const id = req.query.variantId;
-  console.log(id);
+  console.log("GET: ", id);
   if(okResponse.includes(id)){
     res.status(200).send(okRes);
   } else {
@@ -65,7 +59,11 @@ const conflictRes={"errors":[{"code":"Conflict","status":409,"detail":"Data exis
 
 
 app.post("/stocks", function(req, res){
-  const id = req.query.variantId;
+  const id = req.body.variantId;
+  console.log("POST: ", id);
+  const conflictResponse = ["2001", "2002","2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010"];
+  const conflictRes = {"errors":[{"code":"Conflict","status":409,"detail":"Data exists with sourceUpdatedAt: 2021-05-12T12:23:00.000Z Please try again with the updated data"}]};
+  
   if(conflictResponse.includes(id)){
     res.status(409).send(conflictRes);
   }
